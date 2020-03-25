@@ -2,50 +2,53 @@ using escape_corona.Interfaces;
 
 namespace escape_corona.Models
 {
-    class Game : IGame
+  class Game : IGame
+  {
+    public IPlayer CurrentPlayer { get; set; }
+    public IRoom CurrentRoom { get; set; }
+
+    ///<summary>Initalizes data and establishes relationships</summary>
+    public Game()
     {
-        public IPlayer CurrentPlayer { get; set; }
-        public IRoom CurrentRoom { get; set; }
-
-        ///<summary>Initalizes data and establishes relationships</summary>
-        public Game()
-        {
-            // NOTE ALL THESE VARIABLES ARE REMOVED AT THE END OF THIS METHOD
-            // We retain access to the objects due to the linked list
+      // NOTE ALL THESE VARIABLES ARE REMOVED AT THE END OF THIS METHOD
+      // We retain access to the objects due to the linked list
 
 
-            // NOTE Create all rooms
-            Room produce = new Room("Produce Section", @"
-                 \|/
-                 AXA
-                /XXX\
-                \XXX/
-                 `^'
-            Plenty of Fruit and Veggies, wonder why no on is stockpiling these yet");
-            Room electronics = new Room("Electronics", "Lots of stuff still here, yet no webcams in sight.");
-            Room frozenFoods = new Room("Frozen Foods", "Mostly empty shelves though the vegan chocolate hummus is still in stock for some reason");
-            EndRoom checkout = new EndRoom("Checkout", "A stressed minimum wage employee stares out you with a thousand yard stare, he has seen too much these last few weeks", true, "You breeze through the checkout with your new found wealth!");
-            EndRoom toiletPaperIsle = new EndRoom("Toiletries", "A hoarde of people are racing through this aisle with their weapons out", false, "You are trampled under foot and your name is lost to history");
+      // NOTE Create all rooms
+      Room frontYard = new Room("Front Yard", "You stand in front of a dilapidated old building. A rickety porch lies to your east.");
+      Room northYard = new Room("North Yard", "Boarded windows and open prairie is all you see.");
+      Room southYard = new Room("South Yard", "Boarded windows and open prairie is all you see.");
+      Room backYard = new Room("Back Yard", "An old shed stands alone towards the southeast corner of the yard.");
+      Room porch = new Room("Porch", "As you walk up the stairs, they creak dangerously. You can count more than one loose nail in this landing.");
+      Room closet = new Room("A Closet?", "Crack! The floor gives way, leaving you tumbling into a previouly dark room.");
 
-            // NOTE Create all Items
-            Item tp = new Item("Toilet Paper", "A Single Roll of precious paper, it must have fallen from a pack");
+      // NOTE Create all Items
+      Item tp = new Item("Toilet Paper", "A Single Roll of precious paper, it must have fallen from a pack");
+      Item bulb = new Item("Glowing Bulb", "It glows light blue, flickering occasionally. It's warm to the touch.");
 
-            // NOTE Make Room Relationships
-            produce.Exits.Add("east", electronics);
-            electronics.Exits.Add("west", produce);
-            electronics.Exits.Add("north", frozenFoods);
-            electronics.Exits.Add("east", toiletPaperIsle);
-            frozenFoods.Exits.Add("south", electronics);
+      // NOTE Make Room Relationships
+      //Front Yard
+      frontYard.Exits.Add("north", northYard);
+      frontYard.Exits.Add("east", porch);
+      frontYard.Exits.Add("south", southYard);
+      //South Yard
+      southYard.Exits.Add("west", frontYard);
+      southYard.Exits.Add("east", backYard);
+      //North Yard
+      northYard.Exits.Add("east", backYard);
+      northYard.Exits.Add("west", frontYard);
+      //Back Yard
+      backYard.Exits.Add("north", northYard);
+      backYard.Exits.Add("south", southYard);
+      //Porch
+      porch.Exits.Add("east", closet);
+      porch.Exits.Add("west", frontYard);
 
-            frozenFoods.AddLockedRoom(tp, "west", checkout);
-            checkout.Exits.Add("east", frozenFoods);
+      // NOTE put Items in Rooms
+      frontYard.Items.Add(bulb);
 
-
-            // NOTE put Items in Rooms
-            electronics.Items.Add(tp);
-
-
-            CurrentRoom = produce;
-        }
+      northYard.AddLockedRoom(bulb, "south", southYard);
+      CurrentRoom = frontYard;
     }
+  }
 }
