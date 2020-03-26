@@ -27,7 +27,7 @@ namespace escape_corona.Models
       Item tp = new Item("Toilet Paper", "A Single Roll of precious paper, it must have fallen from a pack");
       Item bulb = new Item("Glowing Bulb", "It glows light blue, flickering occasionally. It's warm to the touch.");
 
-      Point shed = new Point("shed", "");
+      Point shed = new Point("shed", "The old sheds leans a little too far left, but otherwise seems in good shape. The door is deadbolted.");
 
       // NOTE Make Room Relationships
       //Front Yard

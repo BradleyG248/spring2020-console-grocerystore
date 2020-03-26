@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using escape_corona.Interfaces;
 using escape_corona.Models;
 
@@ -44,7 +43,7 @@ namespace escape_corona.Services
 
     public void Help()
     {
-      Messages.Add("Commands: quit, reset, look, inventory, go(direction), take(item), use(item), help(obviously).");
+      Messages.Add("Commands: quit, reset, look, examine(feature), inventory, go(direction), take(item), use(item), help(obviously).");
     }
 
     public void Inventory()
