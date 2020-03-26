@@ -21,6 +21,7 @@ namespace escape_corona.Models
       Room backYard = new Room("Back Yard", "An old shed stands alone towards the southeast corner of the yard.");
       Room porch = new Room("Porch", "As you walk up the stairs, they creak dangerously. You can count more than one loose nail in this landing.");
       Room closet = new Room("A Closet?", "Crack! The floor gives way, leaving you tumbling into a previouly dark room.");
+      Room mainHallway = new Room("Hallway", "The dark hallway eerily reflects the glow of your orb. To your north and south lay darkness; the hallway must continue.", "The bright lamps illuminate the hallway clearly, and by your feet you find a hidden door, just big enough to crawl through.");
 
       // NOTE Create all Items
       Item tp = new Item("Toilet Paper", "A Single Roll of precious paper, it must have fallen from a pack");
@@ -43,6 +44,8 @@ namespace escape_corona.Models
       //Porch
       porch.Exits.Add("east", closet);
       porch.Exits.Add("west", frontYard);
+      //Closet
+      closet.Exits.Add("east", mainHallway);
 
       // NOTE put Items in Rooms
       frontYard.Items.Add(bulb);
