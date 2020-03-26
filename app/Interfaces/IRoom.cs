@@ -6,6 +6,7 @@ namespace escape_corona.Interfaces
   {
     string Name { get; set; }
     string Description { get; set; }
+    string LockedMessage { get; set; }
     List<IItem> Items { get; set; }
     List<IPoint> PointsOfInterest { get; set; }
 

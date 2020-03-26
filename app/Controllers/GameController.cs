@@ -14,13 +14,13 @@ namespace escape_corona.Controllers
       Console.WriteLine("Hello there what is your name?");
       // NOTE Gets string from readline and passes is as the player name
       _gs = new GameService(Console.ReadLine());
-      string greeting = "You're curious about this house.";
-      foreach (char letter in greeting)
-      {
-        Console.Write(letter);
-        //Thread.Sleep(100);
-      }
-      Console.WriteLine();
+      string greeting = $"You've been researching some of the past scientists of your local town, and found some interesting ties between them. It seems this house was a meeting place of sorts. Find what information you can on what happened here.";
+      // foreach (char letter in greeting)
+      // {
+      //   Console.Write(letter);
+      //   Thread.Sleep(10);
+      // }
+      Console.WriteLine(greeting);
       Print();
       while (_running)
       {

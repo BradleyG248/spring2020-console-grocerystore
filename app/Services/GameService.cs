@@ -35,6 +35,17 @@ namespace escape_corona.Services
         }
         return true;
       }
+      else if (_game.CurrentRoom.LockedExits.Count > 0)
+      {
+        foreach (var lockedRoom in _game.CurrentRoom.LockedExits.Values)
+        {
+          if (direction == lockedRoom.Key)
+          {
+            Messages.Add($"{lockedRoom.Value.LockedMessage}");
+          }
+        }
+        return true;
+      }
       //no exit in that direction
       Messages.Add("No Room in that direction");
       Look();
@@ -67,8 +78,11 @@ namespace escape_corona.Services
           Messages.Add("     " + item.Name);
         }
       }
-      string exits = string.Join(", ", _game.CurrentRoom.Exits.Keys);
-      Messages.Add("There are exits to the " + exits);
+      if (_game.CurrentRoom.Exits.Count > 0)
+      {
+        string exits = string.Join(", ", _game.CurrentRoom.Exits.Keys);
+        Messages.Add("There are exits to the " + exits);
+      }
 
       string lockedExits = "";
       if (_game.CurrentRoom.LockedExits.Count > 0)

@@ -7,6 +7,7 @@ namespace escape_corona.Models
   {
     public string Name { get; set; }
     public string Description { get; set; }
+    public string LockedMessage { get; set; }
     public string EventDesc { get; set; }
     public string EventRoom { get; set; }
     public List<IItem> Items { get; set; }
@@ -41,7 +42,7 @@ namespace escape_corona.Models
       return "No use for that here";
     }
 
-    public Room(string name, string description, string hidden = null)
+    public Room(string name, string description, string hidden = null, string lockedMessage = null)
     {
       Name = name;
       Description = description;
@@ -50,6 +51,7 @@ namespace escape_corona.Models
       Items = new List<IItem>();
       Exits = new Dictionary<string, IRoom>();
       LockedExits = new Dictionary<IItem, KeyValuePair<string, IRoom>>();
+      LockedMessage = lockedMessage;
     }
   }
 }
