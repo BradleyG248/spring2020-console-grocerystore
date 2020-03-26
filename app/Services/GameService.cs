@@ -72,20 +72,34 @@ namespace escape_corona.Services
       Messages.Add("There are exits to the " + exits);
 
       string lockedExits = "";
-      foreach (var lockedRoom in _game.CurrentRoom.LockedExits.Values)
+      if (_game.CurrentRoom.LockedExits.Count > 0)
       {
-        lockedExits += lockedRoom.Key;
+        foreach (var lockedRoom in _game.CurrentRoom.LockedExits.Values)
+        {
+          lockedExits += lockedRoom.Key;
+        }
+        Messages.Add("There are locked exits to the " + lockedExits);
       }
-      Messages.Add("There are locked exits to the " + lockedExits);
 
     }
 
+    public void Examine(string pointName)
+    {
+      IPoint found = _game.CurrentRoom.PointsOfInterest.Find(p => p.Name.ToLower() == pointName);
+      if (found != null)
+      {
+        Messages.Add($"{found.Description}");
+        return;
+      }
+      Messages.Add("Can't find feature by that name");
+    }
     public void Reset()
     {
       string name = _game.CurrentPlayer.Name;
       _game = new Game();
       _game.CurrentPlayer = new Player(name);
     }
+
 
     public void Take(string itemName)
     {
@@ -95,6 +109,7 @@ namespace escape_corona.Services
         _game.CurrentPlayer.Inventory.Add(found);
         _game.CurrentRoom.Items.Remove(found);
         Messages.Add($"You have taken the {itemName}");
+        Messages.Add($"{found.Description}");
         return;
       }
       Messages.Add("Cannot find item by that name");

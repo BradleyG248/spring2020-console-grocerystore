@@ -7,15 +7,23 @@ namespace escape_corona.Models
   {
     public string Name { get; set; }
     public string Description { get; set; }
-    public string HiddenDesc { get; set; }
+    public string EventDesc { get; set; }
+    public string EventRoom { get; set; }
     public List<IItem> Items { get; set; }
+    public List<IPoint> PointsOfInterest { get; set; }
     public Dictionary<string, IRoom> Exits { get; set; }
     public Dictionary<IItem, KeyValuePair<string, IRoom>> LockedExits { get; set; }
+    public Dictionary<IItem, KeyValuePair<string, List<IRoom>>> Events { get; set; }
 
     public void AddLockedRoom(IItem key, string direction, IRoom room)
     {
       var lockedRoom = new KeyValuePair<string, IRoom>(direction, room);
       LockedExits.Add(key, lockedRoom);
+    }
+    public void AddEvent(IItem trigger, string state, List<IRoom> rooms)
+    {
+      var eventRooms = new KeyValuePair<string, List<IRoom>>(state, rooms);
+      Events.Add(trigger, eventRooms);
     }
 
     public string Use(IItem item)
@@ -37,7 +45,8 @@ namespace escape_corona.Models
     {
       Name = name;
       Description = description;
-      HiddenDesc = hidden;
+      EventDesc = hidden;
+      PointsOfInterest = new List<IPoint>();
       Items = new List<IItem>();
       Exits = new Dictionary<string, IRoom>();
       LockedExits = new Dictionary<IItem, KeyValuePair<string, IRoom>>();

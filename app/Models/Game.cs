@@ -27,6 +27,8 @@ namespace escape_corona.Models
       Item tp = new Item("Toilet Paper", "A Single Roll of precious paper, it must have fallen from a pack");
       Item bulb = new Item("Glowing Bulb", "It glows light blue, flickering occasionally. It's warm to the touch.");
 
+      Point shed = new Point("shed", "");
+
       // NOTE Make Room Relationships
       //Front Yard
       frontYard.Exits.Add("north", northYard);
@@ -41,14 +43,15 @@ namespace escape_corona.Models
       //Back Yard
       backYard.Exits.Add("north", northYard);
       backYard.Exits.Add("south", southYard);
+
+      backYard.PointsOfInterest.Add(shed);
       //Porch
       porch.Exits.Add("east", closet);
       porch.Exits.Add("west", frontYard);
       //Closet
       closet.Exits.Add("east", mainHallway);
 
-      // NOTE put Items in Rooms
-      frontYard.Items.Add(bulb);
+      closet.Items.Add(bulb);
 
       northYard.AddLockedRoom(bulb, "south", southYard);
       CurrentRoom = frontYard;

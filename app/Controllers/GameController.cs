@@ -52,6 +52,9 @@ namespace escape_corona.Controllers
         case "look":
           _gs.Look();
           break;
+        case "examine":
+          _gs.Examine(option);
+          break;
         case "inventory":
           _gs.Inventory();
           break;
