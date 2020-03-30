@@ -83,7 +83,6 @@ namespace escape_corona.Services
         string exits = string.Join(", ", _game.CurrentRoom.Exits.Keys);
         Messages.Add("There are exits to the " + exits);
       }
-
       string lockedExits = "";
       if (_game.CurrentRoom.LockedExits.Count > 0)
       {

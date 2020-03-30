@@ -9,6 +9,8 @@ namespace escape_corona.Interfaces
     string LockedMessage { get; set; }
     List<IItem> Items { get; set; }
     List<IPoint> PointsOfInterest { get; set; }
+    Dictionary<IItem, IEvent> Actions { get; set; }
+    Dictionary<IEvent, KeyValuePair<string, IRoom>> Events { get; set; }
 
     // NOTE "south": {name: "Jungle forest" ....}
     //      "north": {}
