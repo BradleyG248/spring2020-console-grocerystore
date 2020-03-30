@@ -11,6 +11,7 @@ namespace escape_corona.Models
     public string EventDesc { get; set; }
     public string EventRoom { get; set; }
     public List<IItem> Items { get; set; }
+    public List<IPuzzle> Puzzles { get; set; }
     public List<IPoint> PointsOfInterest { get; set; }
     public Dictionary<string, IRoom> Exits { get; set; }
     public Dictionary<IItem, IEvent> Actions { get; set; }
@@ -40,6 +41,7 @@ namespace escape_corona.Models
       else if (Actions.ContainsKey(item))
       {
         IEvent e = Actions[item];
+        e.Active = true;
         e.Rooms.ForEach(r => r.Exits.Add(r.Events[e].Key, r.Events[e].Value));
         return item.UsedString;
       }
@@ -58,6 +60,7 @@ namespace escape_corona.Models
       LockedMessage = lockedMessage;
       Events = new Dictionary<IEvent, KeyValuePair<string, IRoom>>();
       Actions = new Dictionary<IItem, IEvent>();
+      Puzzles = new List<IPuzzle>();
     }
   }
 }

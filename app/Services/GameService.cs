@@ -103,7 +103,44 @@ namespace escape_corona.Services
         Messages.Add($"{found.Description}");
         return;
       }
+      IPuzzle puzzle = _game.CurrentRoom.Puzzles.Find(p => p.Name.ToLower() == pointName);
+      if (puzzle != null)
+      {
+        if (puzzle.Needed != null)
+        {
+          if (puzzle.Needed.Active)
+          {
+            if (puzzle.Solve())
+            {
+              foreach (var exit in puzzle.Exits)
+              {
+                _game.CurrentRoom.Exits.Add(exit.Key, exit.Value);
+              }
+              Messages.Add(puzzle.Success);
+              return;
+            }
+          }
+          Messages.Add(puzzle.Prompt);
+          return;
+        }
+
+        else
+        {
+          if (puzzle.Solve())
+          {
+            foreach (var exit in puzzle.Exits)
+            {
+              _game.CurrentRoom.Exits.Add(exit.Key, exit.Value);
+            }
+            Messages.Add(puzzle.Success);
+            return;
+          }
+          Messages.Add(puzzle.Failure);
+          return;
+        }
+      }
       Messages.Add("Can't find feature by that name");
+
     }
     public void Reset()
     {

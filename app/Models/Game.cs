@@ -39,10 +39,14 @@ namespace escape_corona.Models
 
       Point shed = new Point("Shed", "The old sheds leans a little too far left, but otherwise seems in good shape. The door is deadbolted.");
       Point robot = new Point("Robot", "The robot stands on treads, with a muted red lens mounted to its head. It's locked in the room.");
-      Point chart = new Point("Chart", "Puzzle Clue");
+      Point chart = new Point("Chart", "Next to what appears to be an exposed wire terminal you find a note saying: 'Order of colors: \n Green: first, \n Yellow: second, \n blue: third, \n orange: fourth, \n red: fifth'");
 
       //Events
       Event Power = new Event("Power", powerCell);
+
+      //Puzzles
+      Puzzle Wires = new Puzzle("There are three wires: a red one, a yellow one, and a blue one, as well as three terminals to plug them into.", "yellow blue red", "Elevator", "With a bright spark, the machinery comes to life.", "The wires explode in a bright burst of sparks and smoke, giving you a good jolt.", Power);
+      Wires.Exits.Add("up", escapeOutside);
 
       // NOTE Make Room Relationships
       //Front Yard
@@ -93,6 +97,7 @@ namespace escape_corona.Models
       laboratory.Items.Add(keys);
       //Generator Room
       generatorRoom.Exits.Add("west", northHallway);
+      generatorRoom.PointsOfInterest.Add(chart);
 
       //Foyer
       foyer.Exits.Add("west", mainHallway);
@@ -102,8 +107,8 @@ namespace escape_corona.Models
       generatorRoom.Actions.Add(powerCell, Power);
       //Elevator
       elevator.Exits.Add("west", southHallway);
+      elevator.Puzzles.Add(Wires);
 
-      elevator.AddEvent(Power, "east", escapeOutside);
       northYard.AddLockedRoom(bulb, "south", southYard);
       CurrentRoom = frontYard;
     }

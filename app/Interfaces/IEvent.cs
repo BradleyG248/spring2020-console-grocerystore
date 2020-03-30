@@ -7,5 +7,6 @@ namespace escape_corona.Interfaces
     string Name { get; set; }
     IItem Trigger { get; set; }
     List<IRoom> Rooms { get; set; }
+    bool Active { get; set; }
   }
 }

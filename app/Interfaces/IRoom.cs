@@ -9,6 +9,7 @@ namespace escape_corona.Interfaces
     string LockedMessage { get; set; }
     List<IItem> Items { get; set; }
     List<IPoint> PointsOfInterest { get; set; }
+    List<IPuzzle> Puzzles { get; set; }
     Dictionary<IItem, IEvent> Actions { get; set; }
     Dictionary<IEvent, KeyValuePair<string, IRoom>> Events { get; set; }
 

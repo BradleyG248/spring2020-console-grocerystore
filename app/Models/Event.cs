@@ -10,11 +10,13 @@ namespace escape_corona.Models
       Name = name;
       Trigger = trigger;
       Rooms = new List<IRoom>();
+      Active = false;
     }
 
     public string Name { get; set; }
     public IItem Trigger { get; set; }
     public List<IRoom> Rooms { get; set; }
+    public bool Active { get; set; }
 
   }
 }
