@@ -81,7 +81,12 @@ namespace escape_corona.Controllers
     {
       foreach (string message in _gs.Messages)
       {
-        Console.WriteLine(message);
+        foreach (char character in message)
+        {
+          Console.Write(character);
+          Thread.Sleep(20);
+        }
+        Console.WriteLine();
       }
       _gs.Messages.Clear();
     }
